@@ -1,0 +1,64 @@
+TAP version 13
+# Subtest: cadastro normaliza título e inicia como pendente
+ok 1 - cadastro normaliza título e inicia como pendente
+  ---
+  duration_ms: 0.7465
+  type: 'test'
+  ...
+# Subtest: cadastro rejeita título vazio, responsável vazio e prioridade inválida
+ok 2 - cadastro rejeita título vazio, responsável vazio e prioridade inválida
+  ---
+  duration_ms: 2.1428
+  type: 'test'
+  ...
+# Subtest: alterar status preserva original e atualiza somente a tarefa selecionada
+ok 3 - alterar status preserva original e atualiza somente a tarefa selecionada
+  ---
+  duration_ms: 0.1516
+  type: 'test'
+  ...
+# Subtest: status desconhecido e tarefa inexistente são rejeitados
+ok 4 - status desconhecido e tarefa inexistente são rejeitados
+  ---
+  duration_ms: 0.1223
+  type: 'test'
+  ...
+# Subtest: busca ignora acentos e combina filtros de prioridade e status
+ok 5 - busca ignora acentos e combina filtros de prioridade e status
+  ---
+  duration_ms: 0.7341
+  type: 'test'
+  ...
+# Subtest: resumo conta tarefas por status sem confundir pendentes e concluídas
+ok 6 - resumo conta tarefas por status sem confundir pendentes e concluídas
+  ---
+  duration_ms: 0.1796
+  type: 'test'
+  ...
+# Subtest: persistência recupera os dados salvos
+ok 7 - persistência recupera os dados salvos
+  ---
+  duration_ms: 0.255
+  type: 'test'
+  ...
+# Subtest: dados corrompidos não são aceitos silenciosamente
+ok 8 - dados corrompidos não são aceitos silenciosamente
+  ---
+  duration_ms: 0.199
+  type: 'test'
+  ...
+# Subtest: falha ao gravar armazenamento é propagada ao chamador
+ok 9 - falha ao gravar armazenamento é propagada ao chamador
+  ---
+  duration_ms: 0.2911
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 88.7317
