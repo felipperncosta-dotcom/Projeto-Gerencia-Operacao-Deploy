@@ -7,7 +7,7 @@ export function createTask(input, id = globalThis.crypto.randomUUID()) {
   if (title.length < 3 || title.length > 100) throw new Error('Informe um título de 3 a 100 caracteres.');
   if (!owner || owner.length > 60) throw new Error('Informe um responsável de até 60 caracteres.');
   if (!PRIORITIES.includes(input.priority)) throw new Error('Prioridade inválida.');
-  return { id, title, owner, priority: input.priority, status: 'Concluída' };
+  return { id, title, owner, priority: input.priority, status: 'Pendente' };
 }
 
 export function changeStatus(tasks, id, status) {
