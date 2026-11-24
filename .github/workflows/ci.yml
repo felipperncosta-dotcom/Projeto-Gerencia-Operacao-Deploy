@@ -1,0 +1,38 @@
+name: CI e entrega
+on:
+  push:
+    branches: [main, 'feature/**', 'demo/**']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  testes:
+    name: Testes automatizados
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Executar testes
+        run: npm test
+  entrega:
+    name: Gerar e entregar site
+    needs: testes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: operaboard-site
+          path: dist/
+          if-no-files-found: error
+          retention-days: 90
