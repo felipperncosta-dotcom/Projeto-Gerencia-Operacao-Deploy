@@ -1,0 +1,13 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { createTask, changeStatus, filterTasks, summarize, saveTasks, loadTasks } from '../src/domain.js';
+const sample = () => createTask({ title: ' Revisar deploy ', owner: 'João', priority: 'Alta' }, 't1');
+test('cadastro normaliza título e inicia como pendente', () => { const t = sample(); assert.equal(t.title, 'Revisar deploy'); assert.equal(t.status, 'Pendente'); assert.equal(t.owner, 'João'); });
+test('cadastro rejeita título vazio, responsável vazio e prioridade inválida', () => { for (const field of [{title:' '}, {owner:''}, {priority:'Urgente'}]) assert.throws(() => createTask({...sample(), ...field})); });
+test('alterar status preserva original e atualiza somente a tarefa selecionada', () => { const original = [sample(), {...sample(), id:'t2'}]; const updated = changeStatus(original, 't1', 'Concluída'); assert.equal(updated[0].status, 'Concluída'); assert.equal(updated[1].status, 'Pendente'); assert.equal(original[0].status, 'Pendente'); });
+test('status desconhecido e tarefa inexistente são rejeitados', () => { assert.throws(() => changeStatus([sample()], 't1', 'Feito')); assert.throws(() => changeStatus([sample()], 'ausente', 'Concluída')); });
+test('busca ignora acentos e combina filtros de prioridade e status', () => { const items = [sample(), {...sample(), id:'t2', priority:'Baixa'}]; assert.deepEqual(filterTasks(items, {query:'joao', priority:'Alta', status:'Pendente'}), [items[0]]); assert.equal(filterTasks(items, {status:'Concluída'}).length, 0); });
+test('resumo conta tarefas por status sem confundir pendentes e concluídas', () => { assert.deepEqual(summarize([sample(), {...sample(), id:'t2', status:'Concluída'}]), {total:2, pending:1, active:0, done:1}); assert.equal(summarize([]).total, 0); });
+test('persistência recupera os dados salvos', () => { const memory = new Map(); const storage = {getItem:k=>memory.get(k)??null, setItem:(k,v)=>memory.set(k,v)}; assert.deepEqual(loadTasks(storage), []); saveTasks(storage, [sample()]); assert.deepEqual(loadTasks(storage), [sample()]); });
+test('dados corrompidos não são aceitos silenciosamente', () => { for (const data of ['{', '{}', '[{}]', JSON.stringify([sample(), sample()])]) assert.throws(() => loadTasks({getItem:()=>data})); });
+test('falha ao gravar armazenamento é propagada ao chamador', () => { assert.throws(() => saveTasks({setItem:()=>{throw new Error('Quota');}}, [sample()]), /Quota/); });

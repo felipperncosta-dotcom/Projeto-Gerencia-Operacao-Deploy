@@ -1,0 +1,25 @@
+{
+  "total_count": 1,
+  "artifacts": [
+    {
+      "id": 14886698799,
+      "node_id": "MDg6QXJ0aWZhY3QxNDg4NjY5ODc5OQ==",
+      "name": "operaboard-site",
+      "size_in_bytes": 5655,
+      "url": "https://api.github.com/repos/felipperncosta-dotcom/Projeto-Gerencia-Operacao-Deploy/actions/artifacts/14886698799",
+      "archive_download_url": "https://api.github.com/repos/felipperncosta-dotcom/Projeto-Gerencia-Operacao-Deploy/actions/artifacts/14886698799/zip",
+      "expired": false,
+      "digest": "sha256:fec0470ef2ca2e88b6d26d5757fac09af57f6dd4388495cb94ea1fe9a41910b2",
+      "created_at": "2026-11-24T03:26:27Z",
+      "updated_at": "2026-11-24T03:26:27Z",
+      "expires_at": "2027-02-22T03:26:13Z",
+      "workflow_run": {
+        "id": 45319496265,
+        "repository_id": 1469594724,
+        "head_repository_id": 1469594724,
+        "head_branch": "feature/operaboard",
+        "head_sha": "747524fe9bc482aae9b8c71199b9c724373e7204"
+      }
+    }
+  ]
+}
