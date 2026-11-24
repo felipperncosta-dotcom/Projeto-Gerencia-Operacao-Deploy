@@ -1,0 +1,8 @@
+*   80ab9b1 merge: integrar OperaBoard validado apos demonstracao de recuperacao
+|\  
+| * 108414a docs: registrar evidencias reais de sucesso falha e recuperacao
+| * 747524f Revert "test: demonstrar regressao controlada no status inicial"
+| * 012b3ae test: demonstrar regressao controlada no status inicial
+| * 5247099 feat: implementar painel operacional com testes e pipeline
+|/  
+* d73cdd4 docs: definir objetivo e estrutura do OperaBoard
